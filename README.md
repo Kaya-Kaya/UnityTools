@@ -3,7 +3,7 @@ Tools to make development in Unity quicker.
 
 ## Set-Up
 - [Download](https://github.com/Kaya-Kaya/UnityTools/archive/refs/heads/main.zip)
-- Extract it
+- Extract
 - Go inside the Assets folder
 - Copy UnityTools into your Unity project
 
