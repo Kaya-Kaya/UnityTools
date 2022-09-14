@@ -1,4 +1,7 @@
 # UnityTools
 Tools to make development in Unity quicker.
 
-Download, extract, and copy the UnityTools folder to your Unity project.
+Set-Up:
+- Download the repository.
+- Extract it.
+- Copy the UnityTools folder into your Unity project.
