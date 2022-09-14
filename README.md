@@ -1,2 +1,2 @@
 # UnityTools
-Tools to help make development in Unity quicker.
+Tools to make development in Unity quicker.
