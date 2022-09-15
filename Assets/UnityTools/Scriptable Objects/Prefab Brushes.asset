@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163f09a0b453f534ab6154699b5f3b35, type: 3}
+  m_Name: Prefab Brushes
+  m_EditorClassIdentifier: 
+  prefabs:
+  - name: Square
+    prefab: {fileID: 8803889234170014183, guid: 2d9582c348a93ab4d95a02ad730570c4, type: 3}
+  - name: Circle
+    prefab: {fileID: 3297995237525270087, guid: 803ca0e7c96e1044ca8eae4cb93eb56e, type: 3}
