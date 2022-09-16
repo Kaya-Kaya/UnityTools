@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 163f09a0b453f534ab6154699b5f3b35, type: 3}
-  m_Name: Prefab Brushes
+  m_Name: Prefab Painter Data
   m_EditorClassIdentifier: 
   prefabs:
   - name: Square

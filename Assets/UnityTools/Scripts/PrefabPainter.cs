@@ -8,7 +8,7 @@ using UnityEditor.PackageManager.UI;
 
 public class PrefabPainter : EditorWindow
 {
-    public PrefabBrushes prefabBrushes;
+    PrefabPainterData data;
     bool mouseButton = true;
     bool paintButton = false;
     bool eraseButton = false;
@@ -55,53 +55,56 @@ public class PrefabPainter : EditorWindow
         }
         else if(mouseDown){
             mouseDown = false;
-            OnPlacePrefab(sceneView.camera.ScreenToWorldPoint(GUIUtility.GUIToScreenPoint(Event.current.mousePosition)));
+            OnPlacePrefab(HandleUtility.GUIPointToWorldRay(Event.current.mousePosition).origin);
         }
     }
 
     void OnGUI()
     {
-        GUIStyleState toggled = new GUIStyleState();
-        GUIStyleState notToggled = new GUIStyleState();
-        GUIStyleState hover = new GUIStyleState();
-        notToggled.background = notToggledBackground;
-        ToggleButtonStyleNormal = new GUIStyle(GUI.skin.button)
-        {
-            fixedHeight = 48,
-            normal = notToggled,
-            hover = hover,
-            margin = new RectOffset(0, 0, 0, 0)
-        };
-        toggled.background = toggledBackground;
-        ToggleButtonStyleToggled = new GUIStyle(ToggleButtonStyleNormal);
-        ToggleButtonStyleToggled.normal = toggled;
+        data = (PrefabPainterData)EditorGUILayout.ObjectField("Data", data, typeof(PrefabPainterData), false);
 
-        GUILayout.BeginHorizontal();
-
-        if (GUILayout.Button(mouseIcon, mouseButton ? ToggleButtonStyleToggled : ToggleButtonStyleNormal))
+        if (data)
         {
-            mouseButton = true;
-            paintButton = false;
-            eraseButton = false;
+            GUIStyleState toggled = new GUIStyleState();
+            GUIStyleState notToggled = new GUIStyleState();
+            notToggled.background = notToggledBackground;
+            ToggleButtonStyleNormal = new GUIStyle(GUI.skin.button)
+            {
+                fixedHeight = 48,
+                normal = notToggled,
+                margin = new RectOffset(0, 0, 0, 0)
+            };
+            toggled.background = toggledBackground;
+            ToggleButtonStyleToggled = new GUIStyle(ToggleButtonStyleNormal);
+            ToggleButtonStyleToggled.normal = toggled;
+
+            GUILayout.BeginHorizontal();
+
+            if (GUILayout.Button(mouseIcon, mouseButton ? ToggleButtonStyleToggled : ToggleButtonStyleNormal))
+            {
+                mouseButton = true;
+                paintButton = false;
+                eraseButton = false;
+            }
+
+            if (GUILayout.Button(paintBrushIcon, paintButton ? ToggleButtonStyleToggled : ToggleButtonStyleNormal))
+            {
+                paintButton = true;
+                eraseButton = false;
+                mouseButton = false;
+            }
+
+
+            if (GUILayout.Button(eraserIcon, eraseButton ? ToggleButtonStyleToggled : ToggleButtonStyleNormal))
+            {
+                eraseButton = true;
+                paintButton = false;
+                mouseButton = false;
+            }
+
+
+            GUILayout.EndHorizontal();
         }
-
-        if (GUILayout.Button(paintBrushIcon, paintButton ? ToggleButtonStyleToggled : ToggleButtonStyleNormal))
-        {
-            paintButton = true;
-            eraseButton = false;
-            mouseButton = false;
-        }
-
-        
-        if (GUILayout.Button(eraserIcon, eraseButton ? ToggleButtonStyleToggled : ToggleButtonStyleNormal))
-        {
-            eraseButton = true;
-            paintButton = false;
-            mouseButton = false;
-        }
-        
-
-        GUILayout.EndHorizontal();
     }
 }
 
