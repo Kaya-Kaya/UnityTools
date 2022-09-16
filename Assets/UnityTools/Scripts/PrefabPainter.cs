@@ -21,6 +21,8 @@ public class PrefabPainter : EditorWindow
     private static GUIStyle ToggleButtonStyleNormal = null;
     private static GUIStyle ToggleButtonStyleToggled = null;
 
+    bool mouseDown;
+
     [MenuItem("UnityTools/Prefab Painter")]
     static void Init()
     {
@@ -28,14 +30,33 @@ public class PrefabPainter : EditorWindow
         window.Show();
     }
 
-    void OnPlacePrefab()
+    void OnPlacePrefab(Vector2 position)
     {
-
+        Debug.Log(position);
     }
 
     void OnRemovePrefab()
     {
 
+    }
+
+    void OnEnable()
+    {
+        SceneView.duringSceneGui += SceneGUI;
+    }
+    
+    void SceneGUI(SceneView sceneView)
+    {
+        // This will have scene events including mouse down on scenes objects
+        Event cur = Event.current;
+
+        if(Event.current.type == EventType.MouseDown && Event.current.button == 0){
+            mouseDown = true;
+        }
+        else if(mouseDown){
+            mouseDown = false;
+            OnPlacePrefab(sceneView.camera.ScreenToWorldPoint(GUIUtility.GUIToScreenPoint(Event.current.mousePosition)));
+        }
     }
 
     void OnGUI()
